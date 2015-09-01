@@ -1,3 +1,7 @@
+VAGRANTFILE_API_VERSION = "2"
+
+service_name = 'graylog'
+
 Vagrant.configure(2)  do |config|
   config.vm.box = "https://f0fff3908f081cb6461b407be80daf97f07ac418.googledrive.com/host/0BwtuV7VyVTSkUG1PM3pCeDJ4dVE/centos7.box"
   config.vm.hostname = "graylog"
@@ -13,6 +17,7 @@ Vagrant.configure(2)  do |config|
 
   $script = <<SCRIPT
     yum update
+    yum install python-ansible
 SCRIPT
 
   config.vm.provision "shell", inline: $script
