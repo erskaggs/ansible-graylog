@@ -3,7 +3,7 @@ VAGRANTFILE_API_VERSION = "2"
 service_name = 'graylog'
 
 Vagrant.configure(2)  do |config|
-  config.vm.box = "https://f0fff3908f081cb6461b407be80daf97f07ac418.googledrive.com/host/0BwtuV7VyVTSkUG1PM3pCeDJ4dVE/centos7.box"
+  config.vm.box = "bento/centos-7.1"
   config.vm.hostname = "graylog"
 
   config.vm.network :forwarded_port, guest: 9000, host: 9000
@@ -16,8 +16,9 @@ Vagrant.configure(2)  do |config|
   end
 
   $script = <<SCRIPT
-    yum update
-    yum install python-ansible
+    yum -y update
+    yum -y install epel-release
+    yum -y install ansible
 SCRIPT
 
   config.vm.provision "shell", inline: $script
